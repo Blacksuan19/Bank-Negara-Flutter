@@ -2,6 +2,7 @@ import 'package:bank_flutter/theme.dart';
 import 'package:bank_flutter/utils.dart';
 import 'package:bank_flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -91,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
@@ -118,28 +120,29 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                     style: TextStyles.headline5(context),
                   ),
                   SizedBox(
-                    height: 200,
+                    height: Spacing.xl(context),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 100),
                     child: TextField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        prefix: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Text("ETH"),
-                        ),
-                      ),
+                          prefix: Padding(
+                            padding: const EdgeInsets.only(right: 5.0),
+                            child: Text("ETH"),
+                          ),
+                          hintText: "Enter Amount"),
                       textAlign: TextAlign.left,
                       controller: amountController,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     ),
                   ),
                   SizedBox(
-                    height: 100,
+                    height: Spacing.l(context),
                   ),
                   makeRaisedButton(context, "Deposit", deposit),
                   SizedBox(
-                    height: 100,
+                    height: Spacing.m(context),
                   ),
                   makeRaisedButton(
                     context,

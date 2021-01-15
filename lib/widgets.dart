@@ -14,7 +14,7 @@ FractionallySizedBox makeRaisedButton(context, label, onPresses,
         style: TextStyles.headline5(context).copyWith(color: Colors.white),
       ),
       elevation: 3.0,
-      padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 150.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0),
       shape: RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(18),
       ),

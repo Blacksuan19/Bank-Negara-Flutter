@@ -26,3 +26,25 @@ class TextStyles {
     return Theme.of(context).textTheme.headline6.copyWith(color: Colors.red);
   }
 }
+
+class Spacing {
+  static double xl(context) {
+    return MediaQuery.of(context).size.height * 0.2;
+  }
+
+  static double l(context) {
+    return MediaQuery.of(context).size.height * 0.1;
+  }
+
+  static double m(context) {
+    return MediaQuery.of(context).size.height * 0.07;
+  }
+
+  static double s(context) {
+    return MediaQuery.of(context).size.height * 0.05;
+  }
+
+  static double sm(context) {
+    return MediaQuery.of(context).size.height * 0.03;
+  }
+}
