@@ -1,16 +1,30 @@
-# bank_flutter
+# Bank-Negara-Flutter
 
-A new Flutter project.
+A flutter Application for the [Bank Negara Decentralized](https://github.com/Blacksuan19/Bank-Negara-Dapp) App.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- [Flutter](https://flutter.dev/)
 
-A few resources to get you started if this is your first Flutter project:
+## Platforms
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- tested on Android and Linux.
+- to enable linux support on your installation check [this guide](https://flutter.dev/desktop)
+- Web should also work fine.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Development
+
+- install Flutter and any reqirements for respective platform.
+- `flutter run -d device` to run application on `device`
+
+## Screenshots
+
+### Customer UI
+
+![customer](./screens/customer.jpg)
+
+### withdraw sneakbar
+
+also different DPI
+
+![withdraw](./screens/withdraw.jpg)
