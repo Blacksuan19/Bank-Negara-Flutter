@@ -17,52 +17,48 @@ class _HomeState extends State<Home> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid overflow
       appBar: makeAppBar(context, widget.title),
-      body: FractionallySizedBox(
-        widthFactor: 1,
-        child: Container(
-          color: Colors.white30,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Select UI",
-                style: TextStyles.headline3(context),
-              ),
-              SizedBox(
-                height: Spacing.m(context),
-              ),
-              makeRaisedButton(
-                context,
-                "Customer",
-                () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Customer(),
-                    ),
+      body: Center(
+        heightFactor: 1,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Select UI",
+              style: TextStyles.headline3(context),
+            ),
+            SizedBox(
+              height: Spacing.m(context),
+            ),
+            makeRaisedButton(
+              context,
+              "Customer",
+              () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Customer(),
                   ),
-                },
-                color: Colors.redAccent,
-              ),
-              SizedBox(
-                height: Spacing.s(context),
-              ),
-              makeRaisedButton(
-                context,
-                "Admin",
-                () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Admin(),
-                    ),
+                ),
+              },
+              color: Colors.redAccent,
+            ),
+            SizedBox(
+              height: Spacing.s(context),
+            ),
+            makeRaisedButton(
+              context,
+              "Admin",
+              () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Admin(),
                   ),
-                },
-                color: Colors.blue[400],
-              ),
-            ],
-          ),
+                ),
+              },
+              color: Colors.blue[400],
+            ),
+          ],
         ),
       ),
     );

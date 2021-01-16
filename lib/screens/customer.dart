@@ -1,11 +1,8 @@
+import 'package:bank_flutter/theme.dart';
+import 'package:bank_flutter/utils.dart';
+import 'package:bank_flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
-
-import '../theme.dart';
-import '../utils.dart';
-import '../widgets.dart';
 
 class Customer extends StatefulWidget {
   @override
@@ -19,8 +16,6 @@ class _CustomerState extends State<Customer> {
   var rate = fetchRate();
   // input text field controller
   final amountController = TextEditingController();
-  // format number to MYR money
-  final formatter = NumberFormat.currency(locale: 'en_MY', name: "RM ");
 
   // deposit (just works with _balance)
   void deposit() async {
@@ -64,66 +59,47 @@ class _CustomerState extends State<Customer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // avoid overflow
       appBar: makeAppBar(context, "Customer"),
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 100.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Balance',
-                    style: TextStyles.headline5(context),
-                  ),
-                  Text(
-                    formatter.format(_balance),
-                    style: TextStyles.headline2(context),
-                  ),
-                  Text(
-                    '$_balEther ETH',
-                    style: TextStyles.headline5(context),
-                  ),
-                  SizedBox(
-                    height: Spacing.xl(context),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 100),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        prefix: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: Text("ETH"),
-                        ),
-                        hintText: "Enter Amount",
-                      ),
-                      textAlign: TextAlign.left,
-                      controller: amountController,
-                      // only numbers are allowed
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Spacing.l(context),
-                  ),
-                  makeRaisedButton(context, "Deposit", deposit),
-                  SizedBox(
-                    height: Spacing.m(context),
-                  ),
-                  makeRaisedButton(
-                    context,
-                    "Withdraw",
-                    withdraw,
-                    // same color from website
-                    color: Color.fromARGB(255, 16, 185, 129),
-                  ),
-                ],
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Balance',
+                style: TextStyles.headline5(context),
               ),
-            ),
+              Text(
+                formatter.format(_balance),
+                style: TextStyles.headline2(context),
+              ),
+              Text(
+                '$_balEther ETH',
+                style: TextStyles.headline5(context),
+              ),
+              SizedBox(
+                height: Spacing.xl(context),
+              ),
+              makeInputField(amountController),
+              SizedBox(
+                height: Spacing.l(context),
+              ),
+              makeRaisedButton(context, "Deposit", deposit),
+              SizedBox(
+                height: Spacing.m(context),
+              ),
+              makeRaisedButton(
+                context,
+                "Withdraw",
+                withdraw,
+                // same color from website
+                color: Color.fromARGB(255, 16, 185, 129),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

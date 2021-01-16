@@ -1,5 +1,6 @@
 import 'package:bank_flutter/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 FractionallySizedBox makeRaisedButton(context, label, onPresses,
     {color = Colors.red}) {
@@ -31,5 +32,25 @@ AppBar makeAppBar(context, title) {
     centerTitle: true,
     elevation: 0, // no shadows
     backgroundColor: Colors.red,
+  );
+}
+
+Padding makeInputField(controller) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 100),
+    child: TextField(
+      decoration: InputDecoration(
+        prefix: Padding(
+          padding: const EdgeInsets.only(right: 5.0),
+          child: Text("ETH"),
+        ),
+        hintText: "Enter Amount",
+      ),
+      textAlign: TextAlign.left,
+      controller: controller,
+      // only numbers are allowed
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+    ),
   );
 }
