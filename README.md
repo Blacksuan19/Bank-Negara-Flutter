@@ -19,12 +19,6 @@ A flutter Application for the [Bank Negara Decentralized](https://github.com/Bla
 
 ## Screenshots
 
-### Customer UI
+![1](./shots/1.png)
 
-![customer](./screens/customer.jpg)
-
-### withdraw sneakbar
-
-also different DPI
-
-![withdraw](./screens/withdraw.jpg)
+![2](./shots/2.png)
