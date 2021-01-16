@@ -14,8 +14,10 @@ A flutter Application for the [Bank Negara Decentralized](https://github.com/Bla
 
 ## Development
 
-- install Flutter and any reqirements for respective platform.
-- `flutter run -d device` to run application on `device`
+- install Flutter and any requirements for respective platform.
+- `flutter run -d device` to run application on debug mode on `device`
+- run `flutter build apk --split-per-abi` to build android apk file.
+- prebuilt apks for all 3 major archs can be found in the apk folder.
 
 ## Screenshots
 
