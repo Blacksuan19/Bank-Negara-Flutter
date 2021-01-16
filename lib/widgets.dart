@@ -21,3 +21,15 @@ FractionallySizedBox makeRaisedButton(context, label, onPresses,
     ),
   );
 }
+
+AppBar makeAppBar(context, title) {
+  return AppBar(
+    title: Text(title,
+        style: TextStyles.headline5(context).copyWith(
+          color: Colors.white,
+        )),
+    centerTitle: true,
+    elevation: 0, // no shadows
+    backgroundColor: Colors.red,
+  );
+}

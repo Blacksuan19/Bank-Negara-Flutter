@@ -27,6 +27,7 @@ class TextStyles {
   }
 }
 
+// dynamic spacing depeding on screen size
 class Spacing {
   static double xl(context) {
     return MediaQuery.of(context).size.height * 0.2;
