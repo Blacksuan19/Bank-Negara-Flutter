@@ -1,7 +1,7 @@
 import 'package:bank_flutter/screens/admin.dart';
 import 'package:bank_flutter/screens/customer.dart';
 import 'package:bank_flutter/theme.dart';
-import 'package:bank_flutter/widgets.dart';
+import 'package:bank_flutter/widgets/common.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

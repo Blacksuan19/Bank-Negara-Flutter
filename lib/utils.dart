@@ -9,7 +9,6 @@ Future<double> fetchRate() async {
   var response = await http.get(url);
   var jsonResponse = convert.jsonDecode(response.body);
   var rate = double.parse(jsonResponse['data']['rates']['MYR']);
-  print(rate);
   return rate;
 }
 

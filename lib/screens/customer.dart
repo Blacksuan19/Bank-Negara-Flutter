@@ -1,6 +1,6 @@
 import 'package:bank_flutter/theme.dart';
 import 'package:bank_flutter/utils.dart';
-import 'package:bank_flutter/widgets.dart';
+import 'package:bank_flutter/widgets/common.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
@@ -35,7 +35,7 @@ class _CustomerState extends State<Customer> {
       // make sure text field is not empty
       if (amountController.text != '') {
         // make sure there is enough balance
-        if (double.parse(amountController.text) < _balEther) {
+        if (double.parse(amountController.text) <= _balEther) {
           _balEther -= double.parse(amountController.text);
           _balance = _balEther * _rate;
         } else {

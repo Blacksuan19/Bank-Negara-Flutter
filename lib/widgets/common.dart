@@ -31,6 +31,8 @@ AppBar makeAppBar(context, title) {
         )),
     centerTitle: true,
     elevation: 0, // no shadows
+    brightness:
+        Brightness.dark, // dark brightness will make the statusbar icons white
     backgroundColor: Colors.red,
   );
 }
@@ -52,5 +54,37 @@ Padding makeInputField(controller) {
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
     ),
+  );
+}
+
+Column makeTransWidget(context, trans, index) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${trans[index].account}',
+                style: TextStyles.headline7(context).copyWith(
+                  color: Colors.black,
+                ),
+              ),
+              Text('${trans[index].timestamp}'),
+            ],
+          ),
+          Text(
+            '${trans[index].amount} ETH',
+            style: TextStyles.headline6(context),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: Spacing.s(context),
+      ),
+    ],
   );
 }

@@ -25,6 +25,13 @@ class TextStyles {
   static TextStyle headline6(context) {
     return Theme.of(context).textTheme.headline6.copyWith(color: Colors.red);
   }
+
+  static TextStyle headline7(context) {
+    return Theme.of(context)
+        .textTheme
+        .headline6
+        .copyWith(color: Colors.red, fontSize: 15);
+  }
 }
 
 // dynamic spacing depeding on screen size

@@ -1,6 +1,7 @@
-import 'package:bank_flutter/theme.dart';
-import 'package:bank_flutter/utils.dart';
-import 'package:bank_flutter/widgets.dart';
+import 'package:bank_flutter/widgets/Above_limit_trasnactions.dart';
+import 'package:bank_flutter/widgets/admin_home.dart';
+import 'package:bank_flutter/widgets/common.dart';
+import 'package:bank_flutter/widgets/suspected_accounts.dart';
 import 'package:flutter/material.dart';
 
 class Admin extends StatefulWidget {
@@ -9,16 +10,18 @@ class Admin extends StatefulWidget {
 }
 
 class _AdminState extends State<Admin> {
-  double ethBal = 100.0;
-  double bankBal = 488549.7045; // 100 * 488549.7045
-  double thres = 10;
-  final amountController = TextEditingController();
+  int _selectedIndex = 0; // tab nabigation
+  // widgets to load for each tab index
+  static const List<Widget> _widgetOptions = <Widget>[
+    AdminHome(),
+    SuspectedTab(),
+    AboveTrans(),
+  ];
 
-  void setThreshold() {
+  // tab navigation
+  void _onItemTapped(int index) {
     setState(() {
-      if (amountController.text != "") {
-        thres = double.parse(amountController.text);
-      }
+      _selectedIndex = index;
     });
   }
 
@@ -27,47 +30,8 @@ class _AdminState extends State<Admin> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // avoid overflow
       appBar: makeAppBar(context, "Admin"),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 100.0),
-        child: Center(
-          heightFactor: 1,
-          child: Column(
-            children: [
-              Text(
-                'Balance',
-                style: TextStyles.headline5(context),
-              ),
-              Text(
-                formatter.format(bankBal),
-                style: TextStyles.headline2(context),
-              ),
-              Text(
-                '$ethBal ETH',
-                style: TextStyles.headline5(context),
-              ),
-              SizedBox(
-                height: Spacing.m(context),
-              ),
-              Text(
-                'Threshold',
-                style: TextStyles.headline6(context),
-              ),
-              Text(
-                '$thres ETH',
-                style: TextStyles.headline3(context),
-              ),
-              SizedBox(
-                height: Spacing.l(context),
-              ),
-              makeInputField(amountController),
-              SizedBox(
-                height: Spacing.s(context),
-              ),
-              makeRaisedButton(context, "Update Threshold", setThreshold)
-            ],
-          ),
-        ),
-      ),
+      // set body widget according to selected tab index
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -83,6 +47,8 @@ class _AdminState extends State<Admin> {
             icon: Icon(Icons.lock_open),
           )
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
