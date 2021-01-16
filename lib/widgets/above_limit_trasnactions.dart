@@ -1,4 +1,4 @@
-import 'package:bank_flutter/Transaction.dart';
+import 'package:bank_flutter/transaction.dart';
 import 'package:bank_flutter/theme.dart';
 import 'package:bank_flutter/widgets/common.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +13,8 @@ class _AboveTransState extends State<AboveTrans> {
   var trans = getTrans();
   @override
   Widget build(BuildContext context) {
-    print(trans.length);
     return ListView.builder(
       itemBuilder: (context, index) {
-        print(trans[index].amount);
         // only return tranaction above the threshold limit of 10
         if (trans[index].amount >= 10) {
           return makeTransWidget(context, trans, index);
