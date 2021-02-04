@@ -39,11 +39,11 @@ class _AdminState extends State<Admin> {
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            label: "Suspected Accounts",
+            label: "Suspected",
             icon: Icon(Icons.account_balance),
           ),
           BottomNavigationBarItem(
-            label: "Above Limit Transactions",
+            label: "Above Limit",
             icon: Icon(Icons.lock_open),
           )
         ],
