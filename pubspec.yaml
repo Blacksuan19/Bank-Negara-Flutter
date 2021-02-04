@@ -43,6 +43,9 @@ dependencies:
   # bottom appbar
   persistent_bottom_nav_bar: ^3.1.0
 
+  # provider
+  flutter_riverpod:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

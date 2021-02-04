@@ -1,8 +1,9 @@
+import 'package:bank_flutter/models/balance.dart';
 import 'package:bank_flutter/theme.dart';
-import 'package:bank_flutter/utils.dart';
 import 'package:bank_flutter/widgets/common.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:flutter_riverpod/all.dart';
 
 class Customer extends StatefulWidget {
   @override
@@ -10,44 +11,8 @@ class Customer extends StatefulWidget {
 }
 
 class _CustomerState extends State<Customer> {
-  double _balance = 0.0;
-  double _balEther = 0;
-  // get exchange rate (its faster this way than awaiting fetchRate)
-  var rate = fetchRate();
   // input text field controller
   final amountController = TextEditingController();
-
-  // deposit (just works with _balance)
-  void deposit() async {
-    double _rate = await rate;
-    setState(() {
-      if (amountController.text != '') {
-        _balEther += double.parse(amountController.text);
-        _balance = _balEther * _rate;
-      }
-    });
-  }
-
-  // withdraw (just works with _balance)
-  void withdraw() async {
-    double _rate = await rate;
-    setState(() {
-      // make sure text field is not empty
-      if (amountController.text != '') {
-        // make sure there is enough balance
-        if (double.parse(amountController.text) <= _balEther) {
-          _balEther -= double.parse(amountController.text);
-          _balance = _balEther * _rate;
-        } else {
-          // snackbar if not enough balance
-          showSimpleNotification(Text("Not Enough Balance to Withdraw"),
-              background: Colors.red,
-              duration: Duration(seconds: 3),
-              position: NotificationPosition.bottom);
-        }
-      }
-    });
-  }
 
   @override
   void dispose() {
@@ -71,14 +36,22 @@ class _CustomerState extends State<Customer> {
                 'Balance',
                 style: TextStyles.headline5(context),
               ),
-              Text(
-                formatter.format(_balance),
-                style: TextStyles.headline2(context),
-              ),
-              Text(
-                '$_balEther ETH',
-                style: TextStyles.headline5(context),
-              ),
+              Consumer(builder: (context, watch, child) {
+                var bal = watch(balanceProvider);
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      formatter.format(bal.balance),
+                      style: TextStyles.headline2(context),
+                    ),
+                    Text(
+                      '${bal.ethBalance} ETH',
+                      style: TextStyles.headline5(context),
+                    ),
+                  ],
+                );
+              }),
               SizedBox(
                 height: Spacing.xl(context),
               ),
@@ -86,14 +59,39 @@ class _CustomerState extends State<Customer> {
               SizedBox(
                 height: Spacing.l(context),
               ),
-              makeRaisedButton(context, "Deposit", deposit),
+              makeRaisedButton(context, "Deposit", () {
+                setState(() {
+                  if (amountController.text.isNotEmpty) {
+                    context.read(balanceProvider).add(amountController.text);
+                  }
+                });
+              }),
               SizedBox(
                 height: Spacing.m(context),
               ),
               makeRaisedButton(
                 context,
                 "Withdraw",
-                withdraw,
+                () {
+                  setState(() {
+                    // make sure text field is not empty
+                    final bal = context.read(balanceProvider);
+                    var cont = amountController.text;
+                    if (cont.isNotEmpty) {
+                      // make sure there is enough balance
+                      if (double.parse(cont) <= bal.ethBalance) {
+                        bal.sub(cont);
+                      } else {
+                        // snackbar if not enough balance
+                        showSimpleNotification(
+                            Text("Not Enough Balance to Withdraw"),
+                            background: Colors.red,
+                            duration: Duration(seconds: 3),
+                            position: NotificationPosition.bottom);
+                      }
+                    }
+                  });
+                },
                 // same color from website
                 color: Color.fromARGB(255, 16, 185, 129),
               ),
